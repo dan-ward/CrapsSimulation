@@ -1,4 +1,4 @@
-// foo again
+// CrapsGame Class
 public class CrapsGame
 {
 	private int point;
@@ -23,7 +23,7 @@ public class CrapsGame
 
 	public boolean playOneGame(int[] wins, int[] losses)
 	{
-		int steps = 1;
+		int roundsPlayed = 1;
 
 		// Roll the dice
 		// Get the value of the roll as point
@@ -36,11 +36,11 @@ public class CrapsGame
 		
 		if (point == 7 || point == 11)
 		{
-			return winForPlayer(wins, steps);
+			return winForPlayer(wins, roundsPlayed);
 		}
 		else if (point==2 || point == 3 || point==12)
 		{
-			return lossForPlayer(losses, steps);
+			return lossForPlayer(losses, roundsPlayed);
 		}
 
 		// Else if point is 2, 3, or 12, announce an immediate loss for player,
@@ -64,38 +64,24 @@ public class CrapsGame
 			do
 			{
 				dice.roll();
-				steps++;
+				roundsPlayed++;
 				value = dice.getLastRoll();
 				println("Next roll is: " + value);
 			}
 			while (gameIsNotOver(value));
-	
-			// the following is equivalent to the above.
-			// Is it easier to understand?
-			
-//			while (true)
-//			{
-//				dice.roll();
-//				value = dice.getLastRoll();
-//				println("Next roll is: " + value);
-//				if (value==7)
-//					break;
-//				if (value==point)
-//					break;
-//			}
-			
-			if (value==7)
+				
+			if (gotSeven(value))
 			{
 				// loss: record losses and return false
 				println("You lose throwing a 7.");
-				losses[steps]++;
+				losses[roundsPlayed]++;
 				return false;
 			}
-			else if (value==point)
+			else if (gotPoint(value))
 			{
 				// win: record wins and return false
 				println("You win by throwing your point " + value);
-				wins[steps]++;
+				wins[roundsPlayed]++;
 				return true;
 
 			}
@@ -104,16 +90,37 @@ public class CrapsGame
 		return false;
 	}
 
-	private boolean gameIsNotOver(int value)
+	private boolean gotPoint(int value)
 	{
-		return value != 7 && value != point;
+		return value==point;
 	}
 
-	private boolean lossForPlayer(int[] losses, int steps)
+	private boolean gotSeven(int value)
+	{
+		return value==7;
+	}
+
+	private boolean gameIsNotOver(int value)
+	{
+		return notSeven(value) && notPoint(value);
+	}
+
+	private boolean notSeven(int value)
+	{
+		//did not get 7
+		return value != 7;
+	}
+
+	private boolean notPoint(int value)
+	{
+		//did not get point
+		return value != point;
+	}
+
+	private boolean lossForPlayer(int[] losses, int roundsPlayed)
 	{
 		println("Loss for player with " + point);
-		losses[steps] = losses[steps] + 1; // number of losses with exactly steps # of steps.
-		// losses[steps]++; 
+		losses[roundsPlayed] = losses[roundsPlayed] + 1; // number of losses with exactly roundsPlayed # of rounds.
 		return false;
 	}
 
@@ -126,11 +133,10 @@ public class CrapsGame
 		println("First roll is: " + dice.getLastRoll());
 	}
 
-	private boolean winForPlayer(int[] wins, int steps)
+	private boolean winForPlayer(int[] wins, int roundsPlayed)
 	{
 		println("Win for player with " + point);
-		wins[steps] = wins[steps] + 1; // number of wins with exactly steps # of steps.
-		// wins[steps]++; 
+		wins[roundsPlayed] = wins[roundsPlayed] + 1; // number of wins with exactly roundsPlayed # of rounds.
 		return true;
 	}
 

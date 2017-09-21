@@ -1,7 +1,7 @@
 
-public class CrookedDie1 extends Die
+public class LoadedDie1 extends Die
 {
-	public CrookedDie1()
+	public LoadedDie1()
 	{
 		CrapsGame.println("  CrookedDie1's constructor called.");
 		
@@ -10,12 +10,12 @@ public class CrookedDie1 extends Die
 	public int getLastRoll() // this OVERRIDES Die's getLastRoll(), replacing
 								// it!
 	{
-		return 3;
+		return 3;  //Always return 3
 	}
 
 	public String toString() // this OVERRIDES Die's toString()
 	{
-		return "A CrookedDie1 always rolling 3, and... " + super.toString();
+		return "A LoadedDie1 always rolling 3, and... " + super.toString();
 	}
 
 }

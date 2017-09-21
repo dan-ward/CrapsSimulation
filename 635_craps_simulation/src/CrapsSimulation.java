@@ -64,7 +64,7 @@ public class CrapsSimulation
 	{
 		// game = new CrapsGame();
 
-		game = new CrapsGame(new CrookedDie1(), new Die()); // two "fair" Die objects
+		game = new CrapsGame(new LoadedDie1(), new Die()); // two "fair" Die objects
 
 		// we'll use the above to substitute Die subclass objects,
 		// thus affecting the outcome
@@ -81,7 +81,7 @@ public class CrapsSimulation
 	 *            total number of games to play
 	 */
 
-	public void play(int n)
+	public void startPlay(int n)
 	{
 		numberOfPlays = n;
 		numberOfWins = 0;
@@ -132,18 +132,18 @@ public class CrapsSimulation
 	
 	public static void main(String[] args)
 	{
-		CrapsSimulation test = new CrapsSimulation();
+		CrapsSimulation simulation = new CrapsSimulation();
 
 		StdOut.println("Starting simulation of " + NUM_TO_PLAY + " games...");
 
 		CrapsGame.showOutput = false; // turn off output to speed up
 		// simulation
 
-		test.play(NUM_TO_PLAY); // play games of craps
+		simulation.startPlay(NUM_TO_PLAY); // play games of craps
 
 		StdOut.println("Done.");
 
-		test.reportStats(); // report the output
+		simulation.reportStats(); // report the output
 
 	}
 }

@@ -18,8 +18,8 @@ public class PlayWithInheritance
 		// which constructors are called in the following?
 
 		Die aSingleDie = new Die();
-		CrookedDie1 crooked1 = new CrookedDie1();
-		CrookedDie2 crooked2 = new CrookedDie2();
+		LoadedDie1 crooked1 = new LoadedDie1();
+		LoadedDie2 crooked2 = new LoadedDie2();
 
 		StdOut.println();
 
